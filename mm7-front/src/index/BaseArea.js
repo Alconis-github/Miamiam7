@@ -10,10 +10,11 @@ const BaseArea = ({ backgroundImage, children }) => {
     justifyContent: 'center',
     alignItems: 'center',
     minWidth: '100%',
-    height: '100vh',
+    height: '80vh',
     backgroundColor: '#d8f3dc',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
+    backgroundImage: `url(${backgroundImage})`,
   };
 
   return (
