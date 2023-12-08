@@ -96,7 +96,7 @@ const routing = [
   ''
 ]
 
-export default function MiniDrawer() {
+export default function Frame() {
   const [open, setOpen] = React.useState(false);
 
   return (

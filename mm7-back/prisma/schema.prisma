@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./bd_mm7.db"
+}
+
+model Recipes {
+  id           Int           @id @unique(map: "sqlite_autoindex_Recipes_1") @default(autoincrement())
+  ofTheDay     Boolean?      @default(false)
+  name         String
+  description  String
+  creationDate DateTime
+  image        String        @unique(map: "sqlite_autoindex_Recipes_2")
+  time         Int
+  ingredients  Ingredients[] @relation("IngredientsToRecipes")
+}
+
+model Ingredients {
+  id      Int       @id @unique(map: "sqlite_autoindex_Ingredients_1") @default(autoincrement())
+  name    String    @unique(map: "sqlite_autoindex_Ingredients_2")
+  image   String?   @unique(map: "sqlite_autoindex_Ingredients_3") @default("")
+  unit    String?   @default("grammes")
+  recipes Recipes[] @relation("IngredientsToRecipes")
+}
