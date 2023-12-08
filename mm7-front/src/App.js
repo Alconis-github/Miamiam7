@@ -2,7 +2,7 @@ import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
 
-import HomePage from './components/HomePage';
+import HomePage from './components/HomePage/HomePage';
 import Frame from './components/Frame';
 import LastRecipesPage from './components/LastRecipesPage';
 import LikedRecipesPage from './components/LikedRecipesPage';
