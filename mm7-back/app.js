@@ -22,6 +22,14 @@ const prisma = new PrismaClient({
 
 app.get('/', (req, res) => res.send('Hello, World!'))
 
+app.get('/api/recipe-of-the-day', async (req, res) => {
+  const result = await prisma.recipes.findFirst({
+    where: {ofTheDay: true}
+  })
+  res.send(result)
+})
+
+
 app.get('/api/recipes', async (req, res) => {
   const result = await prisma.recipes.findMany()
   res.send(result)
@@ -34,12 +42,19 @@ app.get('/api/recipes/:id', async (req, res) => {
   res.send(result)
 })
 
-app.get('/api/recipe-of-the-day', async (req, res) => {
-  const result = await prisma.recipes.findFirst({
-    where: {ofTheDay: true}
+
+app.get('/api/ingredients', async (req, res) => {
+  const result = await prisma.ingredients.findMany()
+  res.send(result)
+})
+
+app.get('/api/ingredients/:id', async (req, res) => {
+  const result = await prisma.ingredients.findUnique({
+    where: {id: parseInt(req.params.id)}
   })
   res.send(result)
 })
+
 
 prisma.$connect
 
