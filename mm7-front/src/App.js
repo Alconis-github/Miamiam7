@@ -6,6 +6,7 @@ import HomePage from './components/HomePage/HomePage';
 import Frame from './components/Frame';
 import LastRecipesPage from './components/LastRecipesPage';
 import LikedRecipesPage from './components/LikedRecipesPage';
+import RecipePage from './components/RecipePage';
 import NoMatchPage from './components/NoMatchPage';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='home' element={<HomePage />}></Route>
         <Route path='liked-recipes' element={<LikedRecipesPage />}></Route>
         <Route path='last-recipes' element={<LastRecipesPage />}></Route>
+        <Route path='recipes/:id' element={<RecipePage />}></Route>
         <Route path='*' element={<NoMatchPage />}></Route>
       </Routes>
     </>

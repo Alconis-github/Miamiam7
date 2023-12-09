@@ -1,7 +1,7 @@
 // Category.js
 import React, { useState } from 'react';
 
-const Category = ({ id, name, icon }) => {
+const Category = ({ updateFilter, name, icon }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -21,6 +21,7 @@ const Category = ({ id, name, icon }) => {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => updateFilter(name)}
     >
       <img src={icon} alt={name} style={{ width: '100px', height: '100px' }} />
       <div style={{ marginTop: '5px', padding: '0 30px' }}>{name}</div>
