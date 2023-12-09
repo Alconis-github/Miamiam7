@@ -1,23 +1,31 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import accueilImg from '../../assets/images/accueil.jpg';
+import accueilImg from '../../assets/images/HomePage/accueil.jpg';
 import BaseArea from './BaseArea';
 import SearchSection from './SearchSection';
 import CategorySelection from './CategorySelection';
-import entreeIcon from '../../assets/images/entree.png';
-import platIcon from '../../assets/images/plat.png';
-import dessertIcon from '../../assets/images/dessert.png';
-import boissonIcon from '../../assets/images/boisson.png';
+import entreeIcon from '../../assets/images/HomePage/entree.png';
+import platIcon from '../../assets/images/HomePage/plat.png';
+import dessertIcon from '../../assets/images/HomePage/dessert.png';
+import boissonIcon from '../../assets/images/HomePage/boisson.png';
 import Category from './CategorySelection';
 
 function HomePage() {
+
+  const [recipe, setRecipe] = React.useState()
+  React.useEffect(() => {
+    fetch("http://localhost:3333/api/recipe-of-the-day")
+    .then((response) => response.json())
+    .then((data) => setRecipe(data))
+    .catch((err) => { console.log(err); });
+  },[])
+
   const innerContainerStyle = {
     minWidth: '25%',
     minHeight: '50%',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
-
   };
 
   const flexC_ContainerStyle = {
@@ -51,6 +59,8 @@ function HomePage() {
   
   
   return (
+    <>
+    {recipe&&(
     <>
     <BaseArea backgroundImage={accueilImg} vheight='60vh'>
       <Container style={flexC_ContainerStyle}>
@@ -93,11 +103,11 @@ function HomePage() {
         <Container style={flexR_ContainerStyle}>
         <Container style={flexC_ContainerStyle}>
             <Typography variant="h2">
-                Recette Vedette
+                Recette Vedette { recipe.name }
             </Typography>
             <img 
-            src={accueilImg} 
-            alt="Image placeholder"
+            src={require(`../../assets/images/Recipes/${recipe.image}`)}
+            alt={ recipe.image }
             style={{
                 width: '250px',
                 height: '250px',
@@ -105,10 +115,12 @@ function HomePage() {
         
         </Container>
         <Container>
-            La recette en question...
+            { recipe.description }
         </Container>
         </Container>
     </BaseArea>
+    </>
+    )}
     </>
   );
 }
