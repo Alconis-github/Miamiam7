@@ -8,20 +8,33 @@ datasource db {
 }
 
 model Recipes {
-  id           Int           @id @unique(map: "sqlite_autoindex_Recipes_1") @default(autoincrement())
-  ofTheDay     Boolean?      @default(false)
-  name         String
-  description  String
-  creationDate DateTime
-  image        String        @unique(map: "sqlite_autoindex_Recipes_2")
-  time         Int
-  ingredients  Ingredients[] @relation("IngredientsToRecipes")
+  id                   Int                    @id @default(autoincrement())
+  ofTheDay             Boolean?               @default(false)
+  name                 String
+  description          String
+  creationDate         DateTime
+  image                String
+  time                 Int
+  type                 String?
+  IngredientsToRecipes IngredientsToRecipes[]
 }
 
 model Ingredients {
-  id      Int       @id @unique(map: "sqlite_autoindex_Ingredients_1") @default(autoincrement())
-  name    String    @unique(map: "sqlite_autoindex_Ingredients_2")
-  image   String?   @unique(map: "sqlite_autoindex_Ingredients_3") @default("")
-  unit    String?   @default("grammes")
-  recipes Recipes[] @relation("IngredientsToRecipes")
+  id                   Int                    @id @unique(map: "sqlite_autoindex_Ingredients_1") @default(autoincrement())
+  name                 String                 @unique(map: "sqlite_autoindex_Ingredients_2")
+  image                String?                @unique(map: "sqlite_autoindex_Ingredients_3") @default("")
+  unit                 String?                @default("grammes")
+  IngredientsToRecipes IngredientsToRecipes[]
+}
+
+model IngredientsToRecipes {
+  ingredient  Int
+  recipe      Int
+  quantity    Unsupported("type double")?
+  Recipes     Recipes                     @relation(fields: [recipe], references: [id], onDelete: Cascade)
+  Ingredients Ingredients                 @relation(fields: [ingredient], references: [id], onDelete: Cascade)
+
+  @@unique([ingredient, recipe], map: "_IngredientsToRecipes_AB_unique")
+  @@index([recipe], map: "_IngredientsToRecipes_B_index")
+  @@map("_IngredientsToRecipes")
 }
