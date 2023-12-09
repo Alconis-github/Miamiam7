@@ -19,7 +19,7 @@ function SearchSection() {
             placeholder="Search..."
             size="large"
           />
-        <IconButton size="large" type="submit" aria-label="search" style={{ backgroundColor: 'red', borderRadius: '12px' }}>
+        <IconButton size="large" type="submit" aria-label="search" style={{ backgroundColor: '#B23E3E', borderRadius: '12px' }}>
           <SearchIcon style={{ fill: "white" }} />
         </IconButton>
         </form>

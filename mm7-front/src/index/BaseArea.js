@@ -1,9 +1,8 @@
 // BaseArea.js
 import React from 'react';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 
-const BaseArea = ({ backgroundImage, vheight="20vh", children }) => {
+const BaseArea = ({vheight="20vh", children, bgColor='#EBEBEB', p='10px'}) => {
   const areaStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -11,10 +10,10 @@ const BaseArea = ({ backgroundImage, vheight="20vh", children }) => {
     alignItems: 'center',
     minWidth: '100%',
     minHeight: vheight,
-    backgroundColor: '#d8f3dc',
+    backgroundColor: bgColor,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    backgroundImage: `url(${backgroundImage})`,
+    padding: p,
   };
 
   return (

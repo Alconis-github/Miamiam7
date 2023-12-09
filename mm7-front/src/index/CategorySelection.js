@@ -12,16 +12,18 @@ const Category = ({ id, name, icon }) => {
         alignItems: 'center',
         cursor: 'pointer',
         margin: '10px',
-        padding: '10px',
+        padding: '15px',
+        paddingTop: '10px',
         width: '32%',
         backgroundColor: isHovered ? '#A4D991' : '#fff',
         transition: 'background-color 0.3s',
+        color: isHovered ? 'white' : 'black',
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <img src={icon} alt={name} style={{ width: '100px', height: '100px' }} />
-      <span style={{ marginTop: '5px' }}>{name}</span>
+      <div style={{ marginTop: '5px', padding: '0 30px' }}>{name}</div>
     </div>
   );
 };
