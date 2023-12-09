@@ -67,7 +67,7 @@ export default function UseAutocomplete() {
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
           {groupedOptions.map((option, index) => (
-            <li {...getOptionProps({ option, index })}>{option.name}</li>
+            <li {...getOptionProps({ option, index })} onClick={() => window.location.href = `http://localhost:3000/recipes/${option.id}`}>{option.name}</li>
           ))}
         </Listbox>
       ) : null}
