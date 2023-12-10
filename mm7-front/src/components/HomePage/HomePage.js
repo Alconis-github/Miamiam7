@@ -48,7 +48,7 @@ function HomePage() {
 
   const [recipe, setRecipe] = React.useState()
   React.useEffect(() => {
-    fetch("http://localhost:3333/api/recipe-of-the-day")
+    fetch("https://miamiam7.smash-house.fr:3333/api/recipe-of-the-day")
     .then((response) => response.json())
     .then((data) => setRecipe(data))
     .catch((err) => { console.log(err); });
@@ -73,7 +73,7 @@ function HomePage() {
 
   const [recipes, setRecipes] = React.useState()
   React.useEffect(() => {
-    fetch("http://localhost:3333/api/recipes")
+    fetch("https://miamiam7.smash-house.fr:3333/api/recipes")
     .then((response) => response.json())
     .then((data) => setRecipes(data))
     .catch((err) => { console.log(err); });
@@ -219,7 +219,7 @@ function HomePage() {
             <Grid item xs={2} sm={4} md={4} key={recipe.id}>
               <div value={recipe} key={recipe.id}>
                 <Item>
-                  <Button onClick={() => window.location.href = `http://localhost:3000/recipes/${recipe.id}`}>
+                  <Button onClick={() => window.location.href = `https://miamiam7.smash-house.fr:3000/recipes/${recipe.id}`}>
                     {recipe.name}
                   </Button>
                 </Item>

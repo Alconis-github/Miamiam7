@@ -93,4 +93,4 @@ app.get('/api/drinks', async (req, res) => {
 
 prisma.$connect
 
-app.listen(port, () => console.log(`Application : http://localhost:${port}`))
+app.listen(port, () => console.log(`Application : https://miamiam7.smash-house.fr:${port}`))
