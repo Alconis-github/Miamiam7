@@ -1,15 +1,22 @@
 import * as React from 'react';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import { styled } from '@mui/system';
-
-const Label = styled('label')({
-  display: 'block',
-});
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
 
 const Input = styled('input')(({ theme }) => ({
-  width: 200,
+  width: 600,
+  height: 30,
+  fontSize: 16,
+  padding: 5,
+  borderRadius: '8px',
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#000',
   color: theme.palette.mode === 'light' ? '#000' : '#fff',
+  // Add placeholder style
+  '::placeholder': {
+    color: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.54)' : 'rgba(255, 255, 255, 0.7)',
+    fontStyle: 'italic', // Set placeholder text to italic
+  },
 }));
 
 const Listbox = styled('ul')(({ theme }) => ({
@@ -60,9 +67,11 @@ export default function UseAutocomplete() {
 
   return (
     <div>
-      <div {...getRootProps()}>
-        <Label {...getInputLabelProps()}>Qu'allons nous manger aujourd'hui ?</Label>
-        <Input {...getInputProps()} />
+      <div {...getRootProps()} >
+        <Input {...getInputProps()}  placeholder="Qu'allons nous manger aujourd'hui ?" />
+        <IconButton aria-label="delete">
+          <SearchIcon />
+       </IconButton>
       </div>
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
