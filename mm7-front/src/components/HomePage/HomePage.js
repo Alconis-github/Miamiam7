@@ -112,23 +112,26 @@ function HomePage() {
             <Typography variant="h2" color="text.primary" paragraph maxWidth="md" style={{fontWeight: 'bold'}}>
                     LA VEDETTE DU JOUR
             </Typography>
-          <Container style={flexR_ContainerStyle} backgroundColor="red">
+          <Container style={flexR_ContainerStyle}>
+          <Grid container spacing={2}>
+          <Grid item xs={12} lg={4}>
               <img
               src={require(`../../assets/images/Recipes/${recipe.image}`)}
               alt={recipe.name}
               style={{
                   width: '250px',
                   height: '250px',
-                  maxWidth:'80%',
               }}/>
-              <Container style={flexC_ContainerStyle} >
+          </Grid>
+            <Grid item xs={12} lg={8} justifyContent="centered" direction="column" alignItems="center">
                 <Typography variant="h3" color="text.primary" paragraph maxWidth="md" style={{fontWeight: 'bold'}}>
-                      {recipe.name}
-                </Typography>
-                <Typography variant="h5" color="text.primary" paragraph maxWidth="md">
-                        {recipe.description}
-                </Typography>
-              </Container>
+                        {recipe.name}
+                  </Typography>
+                  <Typography variant="h5" color="text.primary" paragraph maxWidth="md">
+                          {recipe.description}
+                  </Typography>            
+            </Grid>
+          </Grid>
           </Container>
         </Container>
     </BaseArea>

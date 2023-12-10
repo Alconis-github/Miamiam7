@@ -102,7 +102,7 @@ export default function Frame() {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar sx={{backgroundColor:"#A4D991", height: "70px"}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -114,8 +114,8 @@ export default function Frame() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ textAlign: 'center', flexGrow: 1 }}>
-            Miamiam7
+          <Typography color="black" variant="h4" component="div" sx={{ textAlign: 'center', flexGrow: 1, fontWeight:"bold" }}>
+            MIAMIAM7
           </Typography>
           <IconButton color="inherit">
             <MoreVertIcon />
