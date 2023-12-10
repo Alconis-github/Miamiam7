@@ -1,4 +1,4 @@
-# Miamiam7
+# PROJET WEB APP : Miamiam7
 
 Site de recettes culinaire . Lien : https://miamiam7.smash-house.fr/
 
@@ -21,3 +21,6 @@ Dans le dossier mm7-front, exécuter les commandes suivantes :
 > npm start
 
 Adresse du front : http://localhost:3000
+
+
+Projet réalisé par Nicolas COMBAL, Martin APPER et Eric YU 
