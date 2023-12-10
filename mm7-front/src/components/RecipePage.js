@@ -27,7 +27,7 @@ function RecipePage() {
 
   const [recipe, setRecipe] = React.useState()
   React.useEffect(() => {
-    fetch(`https://miamiam7.smash-house.fr:3333/api/recipes/${lastPart}`)
+    fetch(`${URL_BACK}/api/recipes/${lastPart}`)
     .then((response) => response.json())
     .then((data) => setRecipe(data))
     .catch((err) => { console.log(err); });

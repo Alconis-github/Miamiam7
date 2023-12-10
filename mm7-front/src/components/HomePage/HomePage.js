@@ -15,6 +15,8 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import URL_BACK from '../../env'
+import URL_FRONT from '../../env'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -48,7 +50,7 @@ function HomePage() {
 
   const [recipe, setRecipe] = React.useState()
   React.useEffect(() => {
-    fetch("https://miamiam7.smash-house.fr:3333/api/recipe-of-the-day")
+    fetch(`${URL_BACK}/api/recipe-of-the-day`)
     .then((response) => response.json())
     .then((data) => setRecipe(data))
     .catch((err) => { console.log(err); });
@@ -73,7 +75,7 @@ function HomePage() {
 
   const [recipes, setRecipes] = React.useState()
   React.useEffect(() => {
-    fetch("https://miamiam7.smash-house.fr:3333/api/recipes")
+    fetch(`${URL_BACK}/api/recipes`)
     .then((response) => response.json())
     .then((data) => setRecipes(data))
     .catch((err) => { console.log(err); });
@@ -219,7 +221,7 @@ function HomePage() {
             <Grid item xs={2} sm={4} md={4} key={recipe.id}>
               <div value={recipe} key={recipe.id}>
                 <Item>
-                  <Button onClick={() => window.location.href = `https://miamiam7.smash-house.fr/recipes/${recipe.id}`}>
+                  <Button onClick={() => window.location.href = `${URL_FRONT}/recipes/${recipe.id}`}>
                     {recipe.name}
                   </Button>
                 </Item>
