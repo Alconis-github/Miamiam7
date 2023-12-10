@@ -219,7 +219,7 @@ function HomePage() {
             <Grid item xs={2} sm={4} md={4} key={recipe.id}>
               <div value={recipe} key={recipe.id}>
                 <Item>
-                  <Button onClick={() => window.location.href = `https://miamiam7.smash-house.fr:3000/recipes/${recipe.id}`}>
+                  <Button onClick={() => window.location.href = `https://miamiam7.smash-house.fr/recipes/${recipe.id}`}>
                     {recipe.name}
                   </Button>
                 </Item>
