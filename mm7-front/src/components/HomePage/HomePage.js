@@ -8,10 +8,13 @@ import entreeIcon from '../../assets/images/HomePage/entree.png';
 import platIcon from '../../assets/images/HomePage/plat.png';
 import dessertIcon from '../../assets/images/HomePage/dessert.png';
 import boissonIcon from '../../assets/images/HomePage/boisson.png';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,11 +24,23 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+function addToLocalStorage(recipe) {
+  const existingRecipes = JSON.parse(localStorage.getItem('recipes')) || []
+  existingRecipes.push(recipe)
+  localStorage.setItem('recipes', JSON.stringify(existingRecipes))
+}
+
+function removeFromLocalStorage(recipe) {
+  const existingRecipes = JSON.parse(localStorage.getItem('recipes')) || []
+  const newRecipes = existingRecipes.filter(localRecipe => {
+    return localRecipe.id !== recipe.id;
+  });
+  localStorage.setItem('recipes', JSON.stringify(newRecipes))
+}
+
 function HomePage() {
 
   const [filter, setFilter] = React.useState();
-
-  console.log(filter)
 
   const updateFilter = (newValue) => {
     setFilter(newValue);
@@ -38,6 +53,23 @@ function HomePage() {
     .then((data) => setRecipe(data))
     .catch((err) => { console.log(err); });
   },[])
+
+  const [isFavorite, setIsFavorite] = React.useState(false);
+  React.useEffect(() => {
+    const existingRecipe = JSON.parse(localStorage.getItem('recipes') || '[]').find(
+      (localRecipe) => localRecipe.id === recipe?.id
+    );
+    setIsFavorite(!!existingRecipe);
+  }, [recipe]);
+  
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      removeFromLocalStorage(recipe)
+    } else {
+      addToLocalStorage(recipe)
+    }
+    setIsFavorite(!isFavorite)
+  };
 
   const [recipes, setRecipes] = React.useState()
   React.useEffect(() => {
@@ -109,12 +141,11 @@ function HomePage() {
     {recipe&&(
     <BaseArea>
         <Container style={flexC_ContainerStyle}>
-            <Typography variant="h2" color="text.primary" paragraph maxWidth="md" style={{fontWeight: 'bold'}}>
-                    LA VEDETTE DU JOUR
-            </Typography>
-          <Container style={flexR_ContainerStyle}>
+          <Typography variant="h2" color="text.primary" paragraph maxWidth="md" style={{fontWeight: 'bold'}}>
+                  LA VEDETTE DU JOUR
+          </Typography>
           <Grid container spacing={2}>
-          <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={3}>
               <img
               src={require(`../../assets/images/Recipes/${recipe.image}`)}
               alt={recipe.name}
@@ -122,17 +153,27 @@ function HomePage() {
                   width: '250px',
                   height: '250px',
               }}/>
-          </Grid>
-            <Grid item xs={12} lg={8} justifyContent="centered" direction="column" alignItems="center">
-                <Typography variant="h3" color="text.primary" paragraph maxWidth="md" style={{fontWeight: 'bold'}}>
-                        {recipe.name}
-                  </Typography>
-                  <Typography variant="h5" color="text.primary" paragraph maxWidth="md">
-                          {recipe.description}
-                  </Typography>            
+            </Grid>
+            <Grid item xs={12} lg={7} justifyContent="centered" direction="column" alignItems="center">
+              <Typography variant="h3" color="text.primary" paragraph maxWidth="md" style={{fontWeight: 'bold'}}>
+                {recipe.name}
+                    </Typography>
+                    <Typography variant="h5" color="text.primary" paragraph maxWidth="md">
+                            {recipe.description}
+                    </Typography>            
+            </Grid>
+            <Grid item xs={12} lg={2} display="flex" alignItems = "center" >
+              {isFavorite ? (
+                <IconButton aria-label="like" size="large" onClick={handleFavoriteClick}>
+                  <FavoriteIcon fontSize="inherit"/>
+                </IconButton>
+              ) : (
+                <IconButton aria-label="like" size="large" onClick={handleFavoriteClick}>
+                  <FavoriteBorderIcon fontSize="inherit" />
+                </IconButton>
+              )}
             </Grid>
           </Grid>
-          </Container>
         </Container>
     </BaseArea>
     )}
