@@ -15,8 +15,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import URL_BACK from '../../env'
-import URL_FRONT from '../../env'
+import { URL_BACK, URL_FRONT } from '../../env'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

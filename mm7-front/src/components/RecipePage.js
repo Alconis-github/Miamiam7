@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import BaseArea from './HomePage/BaseArea';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { URL_BACK } from '../env'
 
 function addToLocalStorage(recipe) {
   const existingRecipes = JSON.parse(localStorage.getItem('recipes')) || []
