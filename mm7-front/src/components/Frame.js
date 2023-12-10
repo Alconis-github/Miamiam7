@@ -1,27 +1,13 @@
-import * as React from 'react';
-
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MuiAppBar from '@mui/material/AppBar';
-import MuiDrawer from '@mui/material/Drawer';
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import HomeIcon from '@mui/icons-material/Home';
-import MenuIcon from '@mui/icons-material/Menu';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import StarIcon from '@mui/icons-material/Star';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 const drawerWidth = 240;
 
@@ -46,16 +32,7 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
-const AppBar = styled(MuiAppBar, {
+const StyledAppBar = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -72,92 +49,37 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open && {
-      ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
-    }),
-  }),
-);
 
-const routing = [
-  '/home',
-  '/liked-recipes',
-  '/last-recipes',
-  ''
-]
+const ToolbarContainer = styled(Toolbar)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  [theme.breakpoints.down('sm')]: {
+    justifyContent: 'center',
+  },
+}));
 
 export default function Frame() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => {setOpen(!open)}}
-            edge="start"
-            sx={{
-              marginRight: 5,
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ textAlign: 'center', flexGrow: 1 }}>
-            Miamiam7
-          </Typography>
-          <IconButton color="inherit">
-            <MoreVertIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader />
-        <Divider />
-          <List>
-            {['Accueil', 'Coups de coeur', 'Dernières recettes', 'Les mieux notées'].map((text, index) => (
-              <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                <Link to={routing[index]} style={{ textDecoration: 'none', color: 'black' }}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {index === 0 && <HomeIcon />}
-                    {index === 1 && <FavoriteIcon />}
-                    {index === 2 && <WhatshotIcon />}
-                    {index === 3 && <StarIcon />}
-
-                  </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-                </Link>
-              </ListItem>
-            ))}
-          </List>
-        <Divider />
-      </Drawer>
-      <DrawerHeader />
+      <StyledAppBar position="fixed">
+        <ToolbarContainer sx={{ backgroundColor: "#A4D991", height: "80px" }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            <Button component="div">
+              <Typography color="black" variant="h4" sx={{ textAlign: 'center', fontWeight: "bold" }}>
+                MIAMIAM7
+              </Typography>
+            </Button>
+          </Link>
+          <Link to={'/liked-recipes'} style={{ textDecoration: 'none', color: 'black' }}>
+            <IconButton color="inherit">
+              <FavoriteIcon />
+            </IconButton>
+          </Link>
+        </ToolbarContainer>
+      </StyledAppBar>
     </Box>
   );
 }
